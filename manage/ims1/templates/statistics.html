@@ -1,0 +1,12 @@
+{% include 'header.html' %}
+<section style="margin-top:30px">
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-dark">Total Store Profit: ${{ total_profit }}</li>
+        <li class="list-group-item list-group-item-primary">Total Items in Stock: {{ total_items_in_stock }}</li>
+        <li class="list-group-item list-group-item-secondary">Item with Highest Cost: {{ item_with_highest_cost.name }} - ${{ item_with_highest_cost.cost }}</li>
+        <li class="list-group-item list-group-item-success">Item with Highest Profits: {{ item_with_highest_profit.name }} - ${{ item_with_highest_profit.profit_earned }}</li>
+        <li class="list-group-item list-group-item-danger">Item Most Sold: {{ item_most_sold.name }} - {{ item_most_sold.quantity_sold }} unit</li>
+        <li class="list-group-item list-group-item-warning"><marquee>Items Out of Stock: {{ items_out_of_stock }}</marquee></li>
+        <li class="list-group-item list-group-item-info">Item with Highest Profit Earned: {{ item_with_highest_profit_earned.name }} - ${{ item_with_highest_profit_earned.profit_earned }}</li>
+      </ul>
+</section>

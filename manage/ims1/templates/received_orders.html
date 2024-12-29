@@ -1,0 +1,31 @@
+{% include 'header.html' %}
+<section >
+    <h3>List of order received</h3>
+    <table class="table">
+        <thead>
+
+          <tr>
+            <th scope="col">Order Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Order Date and Time</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for item in received_orders %}
+          <tr>
+            <th scope="row">{{ item.id }}</th>
+            <td>{{item.name}}</td>
+            <td>{{ item.cost }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.orderdttm }}</td>
+          </tr>
+          {% empty %}
+                <tr>
+                    <td colspan="5">No received orders available.</td>
+                </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</section>

@@ -1,0 +1,74 @@
+
+{% include "header.html" %}
+<section >
+    {% csrf_token %}
+    <h3>Orders Received</h3>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Order ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Order date and time</th>
+            <th scope="col">Order received</th>
+            <th scope="col">Order Cancel</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for order in received_orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.name }}</td>
+                    <td>{{order.cost}}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{order.orderdttm}}</td>
+                    {% comment %} <td>
+                        <a href="{% url 'toggle_receive_cancel' order.id 'receive' %}">Receive</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'toggle_receive_cancel' order.id 'cancel' %}">Cancel</a>
+                    </td> {% endcomment %}
+                    <td>
+                        <button id="receive_button_{{ order.id }}" class="receive-button" data-action="receive" onclick="toggleReceiveCancel({{ order.id }}, 'receive')">Receive</button>
+                    </td>
+                    <td>
+                        <button id="cancel_button_{{ order.id }}" class="cancel-button" data-action="cancel" onclick="toggleReceiveCancel({{ order.id }}, 'cancel')">Cancel</button>
+                    </td>
+                    
+                    
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No received orders for this item.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      <script>
+        function toggleReceiveCancel(orderId, action) {
+            // Disable both buttons to prevent further clicks
+            const receiveButton = document.getElementById(`receive_button_${orderId}`);
+            const cancelButton = document.getElementById(`cancel_button_${orderId}`);
+            receiveButton.disabled = true;
+            cancelButton.disabled = true;
+    
+            // Send an AJAX request to the server to perform the action
+            fetch(`/toggle_receive_cancel/${orderId}/${action}/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // No need to do anything here, as the buttons are already disabled
+                    } else {
+                        // Handle any errors if necessary
+                        console.error("Error toggling receive/cancel.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error toggling receive/cancel:", error);
+                });
+        }
+    </script>
+    
+</section>
+

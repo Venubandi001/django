@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Inventory Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div>
+        <nav class="nav nav-pills flex-column flex-sm-row">
+            <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="/">Home Page </a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'create_inventory' %}">Create Inventory </a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'display_inventory' %}">Inventory List</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'orders_received' %}">Orders Received</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'transactions' %}">Transaction</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'received_orders' %}">Received Orders</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'canceled_orders' %}">Canceled Orders</a>
+          </nav>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% include "header.html" %}
+<section>
+    <h1>Edit Inventory Item</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% comment %} {{ form.as_p }} {% endcomment %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ item.name }}" required><br><br>
+        
+        <label for="iin">IIn:</label>
+        <input type="number" id="iin" name="iin" value="{{ item.iin }}" required><br><br>
+
+
+        <label for="cost">Cost:</label>
+        <input type="number" id="cost" name="cost" value="{{ item.cost }}" required><br><br>
+        
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="{{ item.quantity }}" required><br><br>
+
+
+        <label for="Quantity_sold">Quantity Sold:</label>
+        <input type="number" id="Quantity_sold" name="quantity_sold" value="{{ item.quantity_sold }}" required><br><br>
+
+        <label for="selling_price">Selling Price:</label>
+        <input type="number" id="selling_price" name="selling_price" value="{{ item.selling_price }}" required><br><br>
+            {% if form.selling_price.errors %}
+            <div class="alert alert-danger">
+            {{ form.selling_price.errors }}
+            </div>
+            {% endif %}
+
+
+        <label for="revenue">Revenue:</label>
+        <input type="number" id="revenue" name="revenue" value="{{ item.revenue }}" required><br><br>
+        
+        <button type="submit">Save Changes</button>
+    </form>
+</section>
+

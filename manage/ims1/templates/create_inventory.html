@@ -1,0 +1,62 @@
+{% include "header.html" %}
+
+<section>
+    
+ <div class="row">
+    <div class="mx-auto col-10 col-md-8 col-lg-4">
+    <h1>Create Inventory</h1>
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="input-group flex-nowrap">
+                <label for="{{ form.name.id_for_label }}" class="input-group-text">Name</label>
+                {{ form.name }}
+        </div><br>
+
+        <div class="input-group flex-nowrap">
+            <input type="hidden" id="{{ form.iin.id_for_label }}" name="{{ form.iin.name }}" value="{{ form.iin.value }}" readonly>
+
+        </div><br>
+        <div class="input-group flex-nowrap">
+            <label for="{{ form.name.id_for_label }}" class="input-group-text">cost</label>
+            {{ form.cost }}
+        </div><br>
+        <div class="input-group flex-nowrap">
+            {% comment %} <label for="{{ form.name.id_for_label }}" class="input-group-text">quantity</label> {% endcomment %}
+            <input type='hidden' name='quantity' value={{0}} readonly/>
+        </div><br>
+        {% comment %} <div class="input-group flex-nowrap">
+            <label for="{{ form.name.id_for_label }}" class="input-group-text" >Quantity Sold</label>
+            {{ form.quantity_sold }}
+        </div><br> {% endcomment %}
+        <div class="input-group flex-nowrap">
+            {% comment %} <label for="{{ form.quantity_sold.id_for_label }}" class="input-group-text">Quantity Sold</label> {% endcomment %}
+            <input type="hidden" name="{{ form.quantity_sold.name }}" value="{{ form.quantity_sold.value }}" readonly>
+        </div>
+        
+        <div class="input-group flex-nowrap">
+            <label for="{{ form.name.id_for_label }}" class="input-group-text">sellingprice</label>
+            {{ form.selling_price }}
+        </div><br>
+            {% if form.selling_price.errors %}
+            <div>
+            {{ form.selling_price.errors }}
+            </div>
+            {% endif %}
+        {% comment %} <div class="input-group flex-nowrap">
+            <label for="{{ form.name.id_for_label }}" class="input-group-text" >Revenue</label>
+            {{ form.revenue }}
+        </div><br> {% endcomment %}
+        <div class="input-group flex-nowrap">
+            {% comment %} <label for="{{ form.revenue.id_for_label }}" class="input-group-text">Revenue</label> {% endcomment %}
+            <input type="hidden" name="{{ form.revenue.name }}" value="{{ form.revenue.value }}" readonly>
+        </div><br>
+        <button type="submit">Create Inventory</button>
+    </form>
+</div>
+ </div>
+</section> 
+
+
+
+

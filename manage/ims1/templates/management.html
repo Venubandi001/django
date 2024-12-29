@@ -1,0 +1,8 @@
+<script>
+    fetch('/json_file/')  // Make an HTTP GET request to the JSON file URL
+      .then(response => response.json())
+      .then(data => {
+        // Use the JSON data as needed
+        console.log(data);
+      });
+  </script>

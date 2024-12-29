@@ -1,0 +1,898 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet" />
+    <title>Inventory Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.1/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+        
+        .container {
+            display: grid;
+            grid-template-columns: 0.5fr 2fr 8fr; 
+            
+            margin-left: 0px;
+        
+
+        }
+
+        .sidenav {
+            background-color: #bf40bf;
+            color: #fff;
+            margin-left:-14px;
+            {% comment %} padding: 20px; {% endcomment %}
+            
+        }
+
+       
+        .content {
+            padding: 10px;
+            width: 850px;
+            
+        }
+
+        
+        .upper-div {
+            background-color: #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        
+        .sub-row {
+            display: flex;
+            justify-content: space-between;
+            background-color: #fff;
+            {% comment %} padding: 5px; {% endcomment %}
+            margin-bottom: 10px;
+            height: 260px
+        }
+
+       
+        .sub-section {
+            display: flex;
+            justify-content: space-between;
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .navbar {
+            background-color: #ffcce0;
+            color: #fff;
+            padding: 10px;
+            height: 40px;
+            text-align: center;
+        }
+
+        
+       
+        .col-md-4 {
+            max-width: 300px;
+            margin-right: 8px;
+            margin: 2px;
+            padding-left: 0;
+            padding-right: 0;
+            background-color: #eee6ff;
+            border-radius: 6px;
+        }
+
+        
+        .col-md-4 ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .col-md-4 li {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+   
+        .col-md-4 img {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
+
+
+        .col-md-4 .me-auto {
+            font-size: 10px;
+        }
+
+        .col-md-4 .fw-bold {
+            font-weight: bold;
+            flex-grow: 1;
+        }
+
+
+        .col-md-4 .fas.fa-user {
+            font-size: 14px;
+            margin-left: 5px;
+            color: #6c757d; 
+        }
+        .second{
+            width: 300px;
+        }
+        .list-group-item1 {
+            height: 30px; 
+            overflow: hidden; 
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            border: 1px solid #000;
+            border-radius: 6px;
+            margin: 2px;
+            padding: 4px
+        }
+
+        .c1{
+            width: 250px;
+            text-align: center;
+            background-color: #f0f0f5;
+            color: black;
+            font-weight: bold;
+        }
+        .c2{
+            width: 100px;
+            text-align: center;
+        }
+        .g {
+            background-color: #e6ffe6;
+        }
+        .y {
+            background-color: #ffffcc;
+        }
+        .r {
+            background-color: #f9ecf2;
+        }
+
+        .table-container {
+            margin-right: 120px;
+            border: 1px solid #dddddd;
+        }
+        #myTable {
+            border-collapse: collapse;
+            width: 440px;
+        }
+
+        #myTable thead th.sorting::before,
+        #myTable thead th.sorting_asc::before,
+        #myTable thead th.sorting_desc::before {
+                    content: none !important;
+        }
+        #myTable thead th.sorting::after,
+        #myTable thead th.sorting_asc::after,
+        #myTable thead th.sorting_desc::after {
+                    content: none !important;
+        }
+
+        #myTable th {
+            background-color: #f2f2f2;
+            border: 1px solid #dddddd;
+            text-align: center;
+            
+        }
+       
+
+        #myTable td {
+            border: 1px solid #dddddd;
+            text-align: center;
+
+        }
+
+
+        #myTable tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .b1 {
+            background-color: #ffcce0;
+            color: white;
+            border: none;
+        }
+        .img {
+            width:10px;
+            height:10px;
+            margin:5px;
+        }
+        .zonestatics {
+            background-color:#ffffff;
+            border-radius:10px;
+            width:30px;
+            font-weight: bold;
+            padding:3px;
+            color:#99e699
+        }
+
+    </style>
+</head>
+<body>
+     <!-- Navigation Bar (1) -->
+     <div class="navbar">
+        <div class="navbar1">
+            <span><img src="{% static 'management/images/icons8-menu (2) 1.png' %}" style="width: 20px; height:20px"></span>
+            <span style='margin-left:20px'><img src="{% static 'management/images/image 5.png' %}" style="width: 30px; height:20px"></span>
+            <span style='margin-left:20px;color:black'>Management Live</span>
+        </div>
+        <span>
+        <span><img src="{% static 'management/images/icons8-home 1.png' %}" style="width: 20px; height:20px"></span>
+        <span>Home</span>
+        <span><img src="{% static 'management/images/icons8-admissions 3.png' %}" style="width: 15px; height:15px"></span>
+        <span class="btn-group">
+            <button class="btn btn-secondary btn-sm dropdown-toggle b1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admissions</button>
+            <div class="dropdown-menu">
+                
+            </div>
+        </span>
+        <span><img src="{% static 'management/images/Group 356.png' %}" style="width: 20px; height:20px"></span>
+    </span>
+    </div>
+
+    <!-- Main Container (Grid) -->
+    <div class="container">
+        <!-- Side Navigation (2) -->
+        <div class="sidenav">
+            <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="/"><img src="{% static 'management/images/icons8-home 1.png' %}" style="width: 20px; height:20px"></a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'create_inventory' %}"><img src="{% static 'management/images/Group 7389.png' %}" style="width: 60px; height:50px"></a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'display_inventory' %}"><img src="{% static 'management/images/Group 7390 (1).png' %}" style="width: 60px; height:50px"></a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'orders_received' %}"><img src="{% static 'management/images/Group 1800.png' %}" style="width: 60px; height:50px"></a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'transactions' %}"><img src="{% static 'management/images/Group 1790.png' %}" style="width: 60px; height:50px"></a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'received_orders' %}"><img src="{% static 'management/images/Group 1801.png' %}" style="width: 60px; height:60px"></a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'canceled_orders' %}"><img src="{% static 'management/images/icons8-icons8-patient-(2)-2 1.png' %}" style="width: 20px; height:20px"></a>
+        </div>
+
+        <div class="second">
+            <div class="col-md-4">
+                <!-- Your left column content here -->
+                <ul>
+                    <li class="list-group-item d-flex justify-content-between align-items-start rounded" style="background-color: #ff99cc;max-width: 330px;max-height:50px">
+                        <div class="ms-2 me-auto d-flex">
+                            <h3>Key Metrics</h3>
+                        </div>
+                    </li>
+                    <li class="list-group-item  d-flex justify-content-between align-items-start rounded" style='max-width: 330px;max-height:50px'>
+                        <div class="me-auto">
+                            <div style='font-size:10px'>Queue to Registration</div>
+                            <div class="fw-bold">Registration Time</div>
+                        </div>
+                        <span class='p-2'><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" style="width:10px;height:10px;margin:10px">02:34</span>
+                    </li>
+              <li class="list-group-item  d-flex justify-content-between align-items-start rounded" style='max-width: 330px;max-height:50px'>
+                <div class="me-auto">
+                  <div style='font-size:10px'>Registration to Triage</div>
+                  <div class="fw-bold">Time to Triage</div>
+                </div>
+                <span class='p-2'><img src="{% static 'management/images/icons8-clock (4) 2.png' %}"  style="width:10px;height:10px;margin:10px">00:34</span>
+              </li>
+              <li class="list-group-item  d-flex justify-content-between align-items-start rounded" style='max-width: 330px;max-height:50px'>
+                <div class="me-auto">
+                  <div style='font-size:10px'>Triage to Consult</div>
+                  <div class="fw-bold">Time to Consult</div>
+                </div>
+                <span class='p-2'><img src="{% static 'management/images/icons8-clock (4) 2.png' %}"  style="width:10px;height:10px;margin:10px;margin:10px">00:34</span>
+              </li>
+              <li class="list-group-item  d-flex justify-content-between align-items-start rounded" style='max-width: 330px;max-height:50px'>
+                <div class="me-auto">
+                  <div style='font-size:10px'>Triage End to Discharge</div>
+                  <div class="fw-bold">In Zone Time</div>
+                </div>
+                <span class='p-2'><img src="{% static 'management/images/icons8-clock (4) 2.png' %}"  style="width:10px;height:10px;margin:10px">02:34</span>
+              </li>
+              <li class="list-group-item  d-flex justify-content-between align-items-start rounded" style='max-width: 330px;max-height:50px'>
+                <div class="me-auto">
+                  <div style='font-size:10px'>Consultion to Discharge</div>
+                  <div class="fw-bold flex-grow-1">Treatment Time</div>
+                </div>
+                <span class='p-2'><img src="{% static 'management/images/icons8-clock (4) 2.png' %}"  style="width:10px;height:10px;margin:10px">02:34</span>
+              </li>
+              <li class="list-group-item  d-flex justify-content-between align-items-start rounded" style='max-width: 330px;max-height:50px'>
+                <div class="me-auto">
+                  <div style='font-size:10px'>Lab Order Request to Processing</div>
+                  <div class="fw-bold">Lab Processing Time</div>
+                </div>
+                <span class='p-2'><img src="{% static 'management/images/icons8-clock (4) 2.png' %}"  style="width:10px;height:10px;margin:10px">02:34</span>
+              </li>
+              <li class="list-group-item  d-flex justify-content-between align-items-start rounded" style='max-width: 330px;max-height:50px'>
+                <div class="me-auto">
+                  <div style='font-size:10px'>Radiology Order Requset to Processing</div>
+                  <div class="fw-bold">Radiology Processing Time</div>
+                </div>
+                <span class='p-2'><img src="{% static 'management/images/icons8-clock (4) 2.png' %}"  style="width:10px;height:10px;margin:10px">00:34</span>
+              </li>
+               <li class="list-group-item  d-flex justify-content-between align-items-start rounded" style='max-width: 330px;max-height:50px'>
+                <div class="me-auto">
+                  <div style='font-size:10px'>UCC Discharge to IP Bed Allotment</div>
+                  <div class="fw-bold">IP Transfers <span style="margin-left:90px; background-color:#f0f0f5; width:60px; height:60px;font-size:15px"><img src="{% static 'management/images/Group 7559.png' %}" style="width: 15px;height: 15px;margin-left:10px">18</span></div>
+                </div>
+                <span class='p-2'><img src="{% static 'management/images/icons8-clock (4) 2.png' %}"  style="width:10px;height:10px;margin:10px">02:34</span>
+              </li>
+              <ul class="list-group list-group-horizontal">
+                <li class="list-group-item w-50" style="background-color: #2952a3;">
+                    <div class="me-auto ">
+                        <div style='color:white;'>Total Visits</div>
+                        <img src="{% static 'management/images/Group 7484.png' %}" style="width: 60px; height:40px">
+                    </div>     
+                </li>
+                <li class="list-group-item w-50" style="background-color: #2952a3;">
+                    <div class="me-auto ">
+                        <div style='color: white' class="fw-bold">Visit Time</div>
+                        <div style='font-size:10px;color: white'>Registration to discharge</div>
+                        <img src="{% static 'management/images/Group 7483.png' %}" style="width: 60px; height:40px">
+                    </div> 
+                </li>
+              </ul>
+              <ul class="list-group list-group-horizontal">
+                <li class="list-group-item w-50">
+                        <div>
+                            <div class="ms-auto" style='color:#660066;font-size:small'><img src="{% static 'management/images/Group 7422.png' %}" style="width: 15px; height:15px">Insurance</div>
+                            <span>86<span style='margin-left:40px'><img src="{% static 'management/images/icons8-clock (4) 2.png' %}"  style="width:10px;height:10px;margin:10px">02:34</span></span>
+                        </div>     
+                </li>
+                <li class="list-group-item w-50">
+                    <div>
+                        <div class="ms-auto" style='color:#660066;font-size:small'><img src="{% static 'management/images/Group 7378.png' %}" style="width: 10px; height:10px">Self Pay</div>
+                        <span>58<span style='margin-left:40px'><img src="{% static 'management/images/icons8-clock (4) 2.png' %}"  style="width:10px;height:10px;margin:10px">02:34</span></span>
+                    </div> 
+                </li>
+              </ul>
+              <ul class="list-group list-group-horizontal">
+                <li class="list-group-item w-50">
+                        <div>
+                            <div class="ms-auto" style='color:#330080;text-align:left'><img src="{% static 'management/images/Group 7377.png' %}" style="width: 10px; height:10px">International</div>
+                            <span>86<span style='margin-left:40px'><img src="{% static 'management/images/icons8-clock (4) 2.png' %}"  style="width:10px;height:10px;margin:10px">02:34</span></span>
+                        </div>     
+                </li>
+                <li class="list-group-item w-50">
+                    <div>
+                        <div class="ms-auto"><img src="{% static 'management/images/Group 7424.png' %}" style="width: 10px; height:10px">Local</div>
+                        <span>58<span style='margin-left:40px'><img src="{% static 'management/images/icons8-clock (4) 2.png' %}"  style="width:10px;height:10px;margin:10px">02:34</span></span>
+                    </div> 
+                </li>
+              </ul>
+            <ul>
+            </div>
+        </div>
+        
+
+        <!-- Main Content Column (3) -->
+        <div class="content">
+            <!-- Third Content Column Divided into Two Rows -->
+            <div class="sub-row">
+                <div class="zone">
+                    <ul class="list-group list-group-horizontal n0">
+                        <li class="list-group-item1 c1 fw-bold" style="background-color:#2d2d86;color:white">Zone Statistics</li>
+                        <li class="list-group-item1 c2" style="background-color:#00cc66;color:white">Green Zone</li>
+                        <li class="list-group-item1 c2" style="background-color: #ffd633;color:white">Yellow Zone</li>
+                        <li class="list-group-item1 c2" style="background-color: #ff4d4d;color:white">Red Zone</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item1 c1"><img src="{% static 'management/images/Vector.png' %}" ><span style='margin-left:120px'>Total Visit</span></li>
+                        <li class="list-group-item1 c2 g">0</li>
+                        <li class="list-group-item1 c2 y">18</li>
+                        <li class="list-group-item1 c2 r">131</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item1 c1"><img src="{% static 'management/images/Group 7638.png' %}" ><span style='margin-left:150px'>Active</span></li>
+                        <li class="list-group-item1 c2 g">0</li>
+                        <li class="list-group-item1 c2 y">24</li>
+                        <li class="list-group-item1 c2 r">28</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item1 c1"><img src="{% static 'management/images/icons8-discharge 1 (1).png' %}" ><span style='margin-left:120px'>Discharged</span></li>
+                        <li class="list-group-item1 c2 g">0</li>
+                        <li class="list-group-item1 c2 y">6</li>
+                        <li class="list-group-item1 c2 r">0</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item1 c1"><img src="{% static 'management/images/Group 7640.png' %}" ><span style='margin-left:60px'>Average Triage Time</span></li>
+                        <li class="list-group-item1 c2 g"><span class="zonestatics"><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">00:34</span></li>
+                        <li class="list-group-item1 c2 y"><span class="zonestatics"><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">02:34</span></li>
+                        <li class="list-group-item1 c2 r"><span class="zonestatics"><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">03:34</span></li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item1 c1"><img src="{% static 'management/images/Group 7581.png' %}"style="width:20px; height:20px;" ><span style='margin-left:60px'>Average Hold Time</span></li>
+                        <li class="list-group-item1 c2 g"><span class="zonestatics"><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">02:34</span></li>
+                        <li class="list-group-item1 c2 y"><span class="zonestatics"><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">02:34</span></li>
+                        <li class="list-group-item1 c2 r"><span class="zonestatics"><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">00:34</span></li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item1 c1"><img src="{% static 'management/images/Group 7575.png' %}" ><span style='margin-left:60px'>Average Visit Time</span></li>
+                        <li class="list-group-item1 c2 g"><span class="zonestatics"><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">02:34</span></li>
+                        <li class="list-group-item1 c2 y"><span class="zonestatics"><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">00:34</span></li>
+                        <li class="list-group-item1 c2 r"><span class="zonestatics"><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">00:34</span></li>
+                    </ul>
+                </div>
+                <div id='chart'>
+                    
+                </div>
+            </div>
+
+            <!-- Upper Div 4 Divided into Three Rows -->
+            <div class="sub-row">
+                <div id="chart1">
+                    
+                </div>
+                <div id="chart2">
+                    
+                </div>
+                <div id='chart3'>
+                </div>
+            </div>
+
+
+            <!-- Upper Div 5 Divided into Three Rows -->
+            <div class="sub-row">
+                <div>
+                    <div class="card" style="width: 10rem;height:260px">
+                        <div class="card-body">
+                            <h5 class="card-title">Current</h5>
+                            <p class="fw-bold" style="color:red">Waiting Status<p>
+                            <img src="{% static 'management/images/icons8-waiting-room 1.png' %}" style="width: 100px;height: 100px">
+                        </div>
+                      </div>
+                </div>
+                <div>
+                    <div class="card" style="width: 14rem;height:130px ">
+                        <div style="background-color:#4d004d; color:white"> <img src="{% static 'management/images/Group 7556.png' %}" style="width: 10px;height: 10px;margin:10px"><sub>For</sub>Triage</div>
+                        <div class="card-body">
+                            
+                                <span><img src="{% static 'management/images/Group 7559.png' %}" style="width: 20px;height: 20px"><span style="font-size: 40px;">18</span></span>
+                                <span><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img"><span style="font-size: 40px;">02:34</span></span>
+                            
+                        </div>
+                      </div>
+                      <div class="card" style="width: 14rem;height:130px">
+                        <div style="background-color:#4d004d; color:#f0f0f5;"> <img src="{% static 'management/images/Group 7558.png' %}" style="width: 10px;height: 10px;margin:10px"><sub>For</sub>Consultion</div>
+                        <div class="card-body">
+                            
+                                <span><img src="{% static 'management/images/Group 7559.png' %}" style="width: 20px;height: 20px"><span style="font-size: 40px;">28</span></span>
+                                <span><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img"><span style="font-size: 40px;">00:34</span></span>
+                            
+                        </div>
+                      </div>
+                </div>
+                <div class="table-container">
+                    <div class="table1">
+                    <span style="margin-left:10px"><img src="{% static 'management/images/Group 7559.png' %}" style="width: 20px;height: 20px">Doctor Statistics</span>
+                    <table id="myTable" class="display">
+                        <thead>
+                            <tr>
+                                <th>Doctor</th>
+                                <th>Patients</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                            <tr>
+                       
+                                <td>Dr.Alkmal EI Swami</td>
+                
+                                <td>32</td>
+                
+                                <td><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">00.34</td>
+                
+                            </tr>
+                
+                            <tr>
+                
+                                <td>Dr.Ehab Adeb</td>
+                
+                                <td>32</td>
+                
+                                <td><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">00:34</td>
+                
+                            </tr>
+                
+                            <tr>
+                
+                                <td>Dr.Alkmal EI Swami</td>
+                
+                                <td>32</td>
+                
+                                <td><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">02:34</td>
+                
+                            </tr>
+                
+                            <tr>
+                
+                                <td>Dr.Ehab Adeb</td>
+                
+                                <td>32</td>
+                
+                                <td><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">00:34</td>
+                
+                            </tr>
+                
+                            <tr>
+                
+                                <td>Airi Satou</td>
+                
+                                <td>32</td>
+                
+                                <td><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">02:34</td>
+                
+                            </tr>
+                
+                            <tr>
+                
+                                <td>Brielle Williamson</td>
+                
+                                <td>32</td>
+                
+                                <td><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">00:34</td>
+                
+                            </tr>
+                
+                            <tr>
+                
+                                <td>Herrod Chandler</td>
+                
+                                <td>32</td>
+                
+                                <td><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">00:34</td>
+                
+                            </tr>
+                
+                            <tr>
+                
+                                <td>Rhona Davidson</td>
+                
+                                <td>32</td>
+                
+                                <td><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">02:34</td>
+                
+                            </tr>
+                
+                            <tr>
+                
+                                <td>Colleen Hurst</td>
+                
+                                <td>32</td>
+                
+                                <td><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">00:34</td>
+                
+                            </tr>
+                
+                            <tr>
+                
+                                <td>Sonya Frost</td>
+                
+                                <td>32</td>
+                
+                                <td><img src="{% static 'management/images/icons8-clock (4) 2.png' %}" class="img">02:34</td>
+                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>
+        {% comment %} <h1>Data Time: {{ json_data.dttm }}</h1> {% endcomment %}
+    </div>
+<script>
+    $(document).ready(function(){
+        $("#myTable").DataTable({
+            "pageLength": 4,
+            "paging": true,
+            "searching": true,
+            "lengthChange": false,
+            "language":{
+                "info": "",
+                "search": '',
+                "searchPlaceholder": "Search here...",
+                "paginate":{
+                    "previous":"<",
+                    "next":">",
+                    
+                }
+            },
+        });
+    });
+</script>
+<script>
+    
+    var options = {
+        series: [{
+        name: 'Income',
+        type: 'column',
+        data: [7, 3, 9, 6, 6, 3, 7, 5,6,10,9,4]
+      }, {
+        name: 'Cashflow',
+        type: 'column',
+        data: [5, 1, 3, 2, 2, 2, 3, 2,2,6,2,1]
+      }, {
+        name: 'Revenue',
+        type: 'line',
+        data: [10, 14, 18, 18, 22, 12, 25, 29,14,18,10,22]
+      }],
+        chart: {
+        height: 250,
+        width: 300,
+        type: 'line',
+        stacked: false
+      },
+      dataLabels: {
+        enabled: true,
+        style: {
+            fontSize: '4px',
+        }
+      },
+      plotOptions: {
+        bar: {
+            columnWidth: 7,
+            horizontal: false,
+            barHeight: '80%',
+        }
+      },
+      stroke: {
+        width: [1, 1, 4]
+      },
+      title: {
+        align: 'left',
+        offsetX: 110
+      },
+      xaxis: {
+        categories: ["12-2 am", "2-4 am", "4-6 am", "6-8 am", "8-10 am", "10-12 am", "12-2 am", "4-6 am", "6-8 am", "8-10 am", "10-12 am", "12-2 am"],
+        labels: {
+            style: {
+                fontSize: '10px',
+            },
+        },
+      },
+      yaxis: [
+        {
+          axisTicks: {
+            show: false,
+          },
+          axisBorder: {
+            show: false,
+            color: '#008FFB'
+          },
+          labels: {
+            show: false,
+            style: {
+              colors: '#008FFB',
+            }
+          },
+          
+          tooltip: {
+            enabled: true
+          }
+        },
+        {
+          seriesName: 'Income',
+          opposite: true,
+          axisTicks: {
+            show: true,
+          },
+          axisBorder: {
+            show: true,
+            color: '#00E396'
+          },
+          labels: {
+            show: false,
+            style: {
+              colors: '#00E396',
+            }
+          },
+          
+        },
+        {
+          seriesName: 'Revenue',
+          opposite: true,
+          axisTicks: {
+            show: true,
+          },
+          axisBorder: {
+            show: true,
+            color: '#e6ffe6'
+          },
+          labels: {
+            show: false,
+            style: {
+              colors: '#FEB019',
+            },
+          },
+        },
+      ],
+      tooltip: {
+        fixed: {
+          enabled: true,
+          position: 'topLeft', // topRight, topLeft, bottomRight, bottomLeft
+          offsetY: 30,
+          offsetX: 60
+        },
+      },
+      legend: {
+        horizontalAlign: 'left',
+        offsetX: 40
+      }
+      };
+      
+      var chart = new ApexCharts(document.querySelector("#chart"), options);
+      chart.render();
+    
+</script>
+<script>
+    
+    var options = {
+        series: [{
+        name: 'Total Visits',
+        type: 'column',
+        data: [7,0,0,11,0,0,8,0,0,14]
+      }, {
+        name: 'Avg Time',
+        type: 'line',
+        data: [15, 15, 12, 15, 10, 12,15,10,12,15]
+      }],
+        chart: {
+        height: 250,
+        width: 300,
+        type: 'line',
+      },
+      stroke: {
+        width: [0, 4]
+      },
+      dataLabels: {
+        enabled: true,
+        style: {
+            fontSize: '8px',
+        },
+        enabledOnSeries: [1]
+      },
+      plotOptions: {
+        bar: {
+            columnWidth: 30,
+            barHeight: '80%',
+            
+        }
+      },
+      labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
+      xaxis: {
+        type: 'datetime'
+      },
+      yaxis: [{
+            labels: {
+                show: false,
+                formatter: function (value) {
+                    var customLabels = [0, 4, 8, 12, 16, 20, 24, 28, 32];
+                    return customLabels[value];
+                },
+            },
+        
+      
+      }, {
+        opposite: true,
+        labels: {
+            show: false,
+            formatter: function(value) {
+                var customLabels = [0, 4, 8, 12, 16, 20, 24, 28, 32];
+                return customLabels[value];
+            },
+        },
+      },],
+      colors:['#99ff99','#99ff99'],
+      };
+      var bars = document.querySelectorAll(".apexcharts-bar");
+      bars.forEach(function(bar){
+        bar.style.borderTopLeftRadius = "5px"; 
+        bar.style.borderTopRightRadius = "5px";
+      });
+      var chart = new ApexCharts(document.querySelector("#chart1"), options);
+      chart.render();
+</script>
+<script>
+    
+    var options = {
+        series: [{
+        name: 'Total Visits',
+        type: 'column',
+        data: [14,8,6,17,3,9,20,16,25,5,22]
+      }, {
+        name: 'Avg Time',
+        type: 'line',
+        data: [30, 20, 25, 30, 20, 25,30,20,25,30,20]
+      }],
+        chart: {
+        height: 250,
+        width: 300,
+        type: 'line',
+      },
+      stroke: {
+        width: [0, 4]
+      },
+      dataLabels: {
+        enabled: true,
+        style: {
+            fontSize: '8px',
+        },
+        enabledOnSeries: [1]
+      },
+      labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
+      xaxis: {
+        type: 'datetime'
+      },
+      yaxis: [{
+            labels: {
+                show: false,
+            },
+      
+      }, {
+        opposite: true,
+        labels: {
+            show: false,
+        },
+      }],
+      colors:['#b3b3e6','#b3b3e6'],
+      };
+
+      var chart = new ApexCharts(document.querySelector("#chart2"), options);
+      chart.render();
+</script>
+<script>
+    
+    var options = {
+        series: [{
+        name: 'Total Visits',
+        type: 'column',
+        data: [14,4,6,16,3,9,20,14,25,5,22,21]
+      }, {
+        name: 'Avg Time',
+        type: 'line',
+        data: [30, 20, 25, 30, 20, 25,30,20,25,30,20,25]
+      }],
+        chart: {
+        height: 250,
+        width: 300,
+        type: 'line',
+      },
+      stroke: {
+        width: [0, 4]
+      },
+      dataLabels: {
+        enabled: true,
+        style: {
+            fontSize: '8px',
+        },
+        enabledOnSeries: [1]
+      },
+      labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
+      xaxis: {
+        type: 'datetime'
+      },
+      yaxis: [{
+        labels: {
+            show: false,
+        },
+      
+      }, {
+        opposite: true,
+        labels: {
+            show: false,
+        },
+      }],
+      colors:['#602040','#602040']
+      };
+
+      var chart = new ApexCharts(document.querySelector("#chart3"), options);
+      chart.render();
+</script>
+</body>
+</html>
+

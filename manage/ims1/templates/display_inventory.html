@@ -1,0 +1,43 @@
+{% include "header.html" %}
+
+<section >
+    <h3>Inventory Items</h3>
+    <table class="table">
+        <thead>
+
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">IIN</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Quantity_sold</th>
+            <th scope="col">selling_price</th>
+            <th scope="col">Profit_earned</th>
+            <th scope="col">Revenue</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for item in inventory_items %}
+          <tr>
+            <th scope="row">{{ item.name }}</th>
+            <td>{{item.iin}}</td>
+            <td>{{ item.cost }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.quantity_sold }}</td>
+            <td>{{ item.selling_price }}</td>
+            <td>{{ item.profit_earned }}</td>
+            <td>{{ item.revenue}}</td>
+            <td>
+                <a href="{% url 'view_item' item.pk %}" >View</a>
+                <a href="{% url 'edit_inventory' item.pk %}">Edit</a>
+                <a href="{% url 'create_order' item.pk %}">Order</a>
+                <a href="{% url 'sell_item' item.pk %}">Sell</a>
+                {% comment %} <a href="{% url 'delete_inventory' item.pk %}" >Delete</a> {% endcomment %}
+
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</section>
+

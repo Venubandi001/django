@@ -1,0 +1,22 @@
+{% include "header.html" %}
+<section style='margin-left:400px'>
+    <h1>View Item</h1>
+    <dl>
+        <dt>Name:</dt>
+        <dd>{{ item.name }}</dd>
+        <dt>Cost:</dt>
+        <dd>{{ item.cost }}</dd>
+        <dt>Quantity:</dt>
+        <dd>{{ item.quantity }}</dd>
+        <dt>Quantity Sold:</dt>
+        <dd>{{ item.quantity_sold }}</dd>
+        <dt>Selling Price:</dt>
+        <dd>{{ item.selling_price }}</dd>
+        <dt>Profit Earned:</dt>
+        <dd>{{ item.profit_earned }}</dd>
+        <dt>Revenue:</dt>
+        <dd>{{ item.revenue }}</dd>
+    </dl>
+    <a href="{% url 'display_inventory' %}" class="btn btn-primary">Back to Inventory List</a>
+</section>
+
